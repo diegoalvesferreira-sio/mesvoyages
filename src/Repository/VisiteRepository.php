@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Visite>
  */
+
 class VisiteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,9 +17,16 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
 
+
     //    /**
     //     * @return Visite[] Returns an array of Visite objects
     //     */
+    public function findAllOrderBy($champ,$ordre): array{
+        return $this->createQueryBuilder('v') 
+            ->orderBy('v.'.$champ,$ordre)
+            ->getQuery()
+            ->getresult();
+    }
     //    public function findByExampleField($value): array
     //    {
     //        return $this->createQueryBuilder('v')
