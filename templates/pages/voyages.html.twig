@@ -4,13 +4,26 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="text-left" scope="col">ville
+                        <th class="text-left align-top" scope="col">ville
                             <a href="{{ path('voyages.sort', {champ:'ville',ordre :'ASC'}) }}"><</a>
                             <a href="{{ path('voyages.sort', {champ:'ville',ordre :'DESC'}) }}">></a>
+                            <form class="forminline mt-l" method="POST" action="{{ path('voyages.findallequal',{champ:'ville'}) }}">
+                                <div class="form-group mr-l mb-2 btn-sm">
+                                    <input type="text" class="sm" name="recherche">
+                                    <button type="submit" class="btn btn-primary mb-2 btn-sm">filtrer</button>
+                                </div>
+                            </form>
                         </th>
-                        <th class="text-left" scope="col">pays</th>
-                        <th class="text-end" scope="col">note</th>
-                        <th class="text-center" scope="col">date</th>
+                        <th class="text-left align-top" scope="col">pays
+                            <form class="forminline mt-l" method="POST" action="{{ path('voyages.findallequal',{champ:'pays'}) }}">
+                                <div class="form-group mr-l mb-2 btn-sm">
+                                    <input type="text" class="sm" name="recherche">
+                                    <button type="submit" class="btn btn-primary mb-2 btn-sm">filtrer</button>
+                                </div>
+                            </form>
+                        </th>
+                        <th class="text-left align-top" scope="col">note</th>
+                        <th class="text-left align-top" scope="col">date</th>
                     </tr>
                 </thead>
                 <tbody>
