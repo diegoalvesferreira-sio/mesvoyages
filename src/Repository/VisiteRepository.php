@@ -40,8 +40,17 @@ class VisiteRepository extends ServiceEntityRepository
                     ->orderBy('v.datecreation','DESC')
                     ->getQuery()
                     ->getResult();
-        }
+            }
+            
     }
+        
+    public function remove(Visite $visite):void
+    {
+            $this->getEntityManager()->remove($visite);
+            $this->getEntityManager()->flush();
+    }
+        
+}
     //    public function findByExampleField($value): array
     //    {
     //        return $this->createQueryBuilder('v')
@@ -63,4 +72,4 @@ class VisiteRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+
