@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request ;
 use App\Repository\VisiteRepository;
 use App\Form\VisiteType;
+use App\Entity\Visite;
 
 
 
@@ -53,6 +54,23 @@ class AdminVoyagesController extends AbstractController {
         }
         
         return $this ->render("admin/admin.voyages.edit.html.twig",[
+            'visite' => $visite,
+            'formvisite' => $formVisite -> createview()
+        ]);
+    }
+    
+    #[route('/admin/ajout',name:'admin.voyage.ajout')]
+    public function ajout (Request $request): Response{
+        $visite = new Visite() ;
+        $formVisite = $this -> createForm(VisiteType::class,$visite);
+        
+        $formVisite->handlerequest($request);
+        if ($formVisite -> isSubmitted() && $formVisite->isValid()){
+            $this->repository->add($visite);
+            return $this->redirectToRoute ('admin.voyages');
+        }
+        
+        return $this ->render("admin/admin.voyages.ajout.html.twig",[
             'visite' => $visite,
             'formvisite' => $formVisite -> createview()
         ]);
